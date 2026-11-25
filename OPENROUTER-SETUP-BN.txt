@@ -1,0 +1,37 @@
+GLORY SRC — OPENROUTER AI SUPPORT PATCH
+=======================================
+
+The existing AI Support tab now connects to OpenRouter through the aiohttp
+backend route POST /api/ai.
+
+CONFIGURATION
+-------------
+Set the key on the server before starting the app.
+
+Termux / Linux:
+  export OPENROUTER_API_KEY="your_key_here"
+  export OPENROUTER_MODEL="openai/gpt-4o-mini"
+  python app.py
+
+Windows PowerShell:
+  $env:OPENROUTER_API_KEY="your_key_here"
+  $env:OPENROUTER_MODEL="openai/gpt-4o-mini"
+  python app.py
+
+The key is read from the environment and is never embedded in the HTML.
+The default model can be changed with OPENROUTER_MODEL.
+
+FILES CHANGED
+-------------
+- dashboard_server.py: adds POST /api/ai and OpenRouter proxy handling.
+- SETUP.txt: adds setup and security instructions.
+- Web_temp/web.html: existing AI Support UI is retained; it already posts
+  messages to /api/ai.
+
+SECURITY
+--------
+Do not publish this dashboard openly: its other management routes do not have
+full authentication. Use only in a private/trusted environment and add
+authentication plus HTTPS before any public deployment.
+
+OpenRouter may charge for model usage. Check your account's pricing/limits.
